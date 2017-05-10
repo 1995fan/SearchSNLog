@@ -9,27 +9,46 @@
     </Window.DataContext>
     <toolkit:BusyIndicator IsBusy="{Binding IsWaiting}" BusyContent="{Binding WaitingContent}">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Label Grid.Row="2" Content="查询的文件" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
-            <TextBox Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,1,0,1" Text="{Binding TargetFileName}"></TextBox>
-            <Button Grid.Row="3" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetTargetFileNameCommand}"></Button>
-            <Label Grid.Row="4" Content="SN" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <TextBox Grid.Row="5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,0,0,0" Text="{Binding SNFileName}"></TextBox>
-            <Button Grid.Row="5" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetSNFileNameCommand}"></Button>
-            <Label Grid.Row="6" Content="生成目录" HorizontalAlignment="Left"></Label>
-            <TextBox Grid.Row="7" HorizontalAlignment="Left" Height="23" Width="450" Margin="7,1,0,42" Grid.RowSpan="2" Text="{Binding ResultDir}"></TextBox>
-            <Button Grid.Row="7" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetResultLogDirCommand}"></Button>
-            <Button Grid.Row="8" Content="查询" HorizontalAlignment="Center" Width="75" Margin="10" Command="{Binding SearchSNLogCommand}"></Button>
+            <Grid x:Name="GridMain" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="2" Content="查询的文件" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                <TextBlock Grid.Row="2" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding TargetFileError}" Margin="75,5,0,0"></TextBlock>
+                <TextBox Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,1,0,1" Text="{Binding TargetFileName}"></TextBox>
+                <Button Grid.Row="3" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetTargetFileNameCommand}"></Button>
+                <Label Grid.Row="4" Content="SN" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                <TextBlock Grid.Row="4" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding SNError}" Margin="30,5,0,0"></TextBlock>
+                <TextBox Grid.Row="5" x:Name="SN" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,0,0,0" Text="{Binding SNFileName}" MouseDoubleClick="TextBox_MouseDoubleClick"></TextBox>
+                <Button Grid.Row="5" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetSNFileNameCommand}"></Button>
+                <Label Grid.Row="6" Content="生成目录" HorizontalAlignment="Left"></Label>
+                <TextBox Grid.Row="7" HorizontalAlignment="Left" Height="23" Width="450" Margin="7,1,0,42" Grid.RowSpan="2" Text="{Binding ResultDir}"></TextBox>
+                <Button Grid.Row="7" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetResultLogDirCommand}"></Button>
+                <TextBlock Grid.Row="8" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding ResultStr}" Margin="5,10,0,0"></TextBlock>
+                <Button Grid.Row="8" Content="查询" HorizontalAlignment="Center" Width="75" Margin="10" Command="{Binding SearchSNLogCommand}"></Button>
+            </Grid>
+
+            <Grid x:Name="SNGrid" Visibility="Collapsed" >
+                <Border Background="#90000000">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions >
+                        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="200" Margin="5" Grid.Column="0" Text="{Binding SNTextBox}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                        <Button Content="确定" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="60,80" Grid.Column="1" Click="Button_Click"></Button>
+                    </Grid>
+                </Border>
+            </Grid>
+
         </Grid>
     </toolkit:BusyIndicator>
 

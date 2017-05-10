@@ -23,7 +23,25 @@ namespace SearchSNLog
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+        }
+
+        private void TextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.SNGrid.Visibility == System.Windows.Visibility.Collapsed)
+            {
+                this.SNGrid.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.SNGrid.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.SN.Text = "...";
+                this.SNGrid.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
     }
 }

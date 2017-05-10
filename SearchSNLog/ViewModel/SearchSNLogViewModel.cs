@@ -15,7 +15,7 @@ using System.Data;
 
 namespace SearchSNLog.ViewModel
 {
-    public class SearchSNLogViewModel : NotificationObject
+    public class SearchSNLogViewModel: NotificationObject 
     {
         string LogFileName = string.Empty;
 
@@ -72,6 +72,64 @@ namespace SearchSNLog.ViewModel
             }
         }
 
+        private string _SNTextBox;
+        /// <summary>
+        /// SN文本
+        /// </summary>
+        public string SNTextBox
+        {
+            get { return _SNTextBox; }
+            set 
+            {
+                _SNTextBox = value;
+                RaisePropertyChanged("SNTextBox");
+            }
+        }
+
+        private string _TargetFileError;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TargetFileError
+        {
+            get { return _TargetFileError; }
+            set 
+            {
+                _TargetFileError = value;
+                RaisePropertyChanged("TargetFileError");
+            }
+        }
+
+        private string _SNError;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SNError
+        {
+            get { return _SNError; }
+            set
+            {
+                _SNError = value;
+                RaisePropertyChanged("SNError");
+            }
+        }
+
+        private string _ResultStr;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ResultStr
+        {
+            get { return _ResultStr; }
+            set
+            {
+                _ResultStr = value;
+                RaisePropertyChanged("ResultStr");
+            }
+        }
+        
+        
+
         public SearchSNLogViewModel()
         {
             if (ResultDir ==null)
@@ -116,6 +174,7 @@ namespace SearchSNLog.ViewModel
             OpenFileDialog fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                SNTextBox = null;
                 SNFileName = fileDialog.FileName;
             }
         }
@@ -136,34 +195,42 @@ namespace SearchSNLog.ViewModel
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += (object sender, DoWorkEventArgs e) =>
             {
+                TargetFileError = null;
+                SNError = null;
+                ResultStr = null;
                 GetSNcsv();
             };
             worker.RunWorkerCompleted += (object sender, RunWorkerCompletedEventArgs e) =>
             {
                 IsWaiting = false;
-                System.Diagnostics.Process.Start(LogFileName);
+                if (File.Exists(LogFileName))
+                {
+                    System.Diagnostics.Process.Start(LogFileName);
+                }
             };
             worker.RunWorkerAsync();
         }
 
         private bool GetSNcsv()
         {
-            if (!File.Exists(SNFileName))
-            {
-                return false;
-            }
-
             LogFileName = ResultDir + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
 
             DataTable dt = new DataTable();
             StringBuilder sb = new StringBuilder();
             bool isFirstCsv = true;
+            if (TargetFileName == null)
+            {
+                TargetFileError = "请选择目标文件！";
+                return false;
+            }
             foreach (string fileName in TargetFileName.Split(new char[]{';'},StringSplitOptions.RemoveEmptyEntries))
 	        {
                 if (!File.Exists(fileName))
                 {
+                    TargetFileError = "目标文件不存在，请重新选择！";
                     return false;
                 }
+                //标示是否读取到所需的行
                 bool isDataLine = false;
 		        using (StreamReader sr=new StreamReader(fileName,Encoding.UTF8))
                 {
@@ -174,7 +241,6 @@ namespace SearchSNLog.ViewModel
                     string[] tableHead = null;
                     //标示列数
                     int columnCount = 0;
-                    //标示是否读取到所需的行
                     //逐行读取CSV中的数据
                     while ((strLine = sr.ReadLine()) != null)
                     {
@@ -230,37 +296,75 @@ namespace SearchSNLog.ViewModel
 
             //DataTable dt1 = dt.Clone();
 
-            using (StreamReader sr = new StreamReader(SNFileName))
+            if (SNTextBox == null||SNTextBox == string.Empty)
             {
-                string content = sr.ReadToEnd();
-                string[] sns = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+                if (SNFileName == null)
+                {
+                    SNError = "请选择SN文件或双击输入SN！";
+                    return false;
+                }
+                if (!File.Exists(SNFileName))
+                {
+                    SNError = "SN文件不存在，请重新选择！";
+                    return false;
+                }
+                using (StreamReader sr = new StreamReader(SNFileName))
+                {
+                    string content = sr.ReadToEnd();
+                    string[] sns = Regex.Split(content, "\r\n", RegexOptions.IgnoreCase);
+                    //sn = sr.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    string rowFilter = string.Empty;
+                    int a = 0;
+                    foreach (string sn in sns)
+                    {
+                        a++;
+                        rowFilter += "SerialNumber='" + sn + "'";
+                        if (sns.Length != a)
+                        {
+                            rowFilter += " or ";
+                        }
+                    }
+
+                    //rowFilter = "SerialNumber='Z73R7Q01HP193ZY9'";
+                    //DataRow[] getRows = dt.Select(rowFilter);
+
+                    //foreach (DataRow row in getRows)
+                    //{
+                    //    dt1.Rows.Add(row.ItemArray);
+                    //}
+
+                    dt.DefaultView.RowFilter = rowFilter;
+                    //dt.DefaultView.Sort = "";
+                }
+            }
+            else
+            {
+                string[] sns = Regex.Split(SNTextBox, "\r\n", RegexOptions.IgnoreCase);
                 //sn = sr.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                string rowFilter=string.Empty;
+                string rowFilter = string.Empty;
                 int a = 0;
                 foreach (string sn in sns)
                 {
                     a++;
-                    rowFilter += "SerialNumber='"+sn+"'";
+                    rowFilter += "SerialNumber='" + sn + "'";
                     if (sns.Length != a)
                     {
                         rowFilter += " or ";
                     }
                 }
 
-                //rowFilter = "SerialNumber='Z73R7Q01HP193ZY9'";
-                //DataRow[] getRows = dt.Select(rowFilter);
-                
-                //foreach (DataRow row in getRows)
-                //{
-                //    dt1.Rows.Add(row.ItemArray);
-                //}
-
                 dt.DefaultView.RowFilter = rowFilter;
-                //dt.DefaultView.Sort = "";
             }
-            
+
 
             DataTable dtView = dt.DefaultView.ToTable();
+
+            ResultStr = string.Format("共{0}条记录", dtView.Rows.Count);
+
+            if (dtView.Rows.Count ==0)
+            {
+                return false;
+            }
 
             for (int i = 0; i < dtView.Rows.Count; i++) //写入各行数据  
             {
