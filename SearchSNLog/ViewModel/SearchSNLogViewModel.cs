@@ -230,6 +230,12 @@ namespace SearchSNLog.ViewModel
                     TargetFileError = "目标文件不存在，请重新选择！";
                     return false;
                 }
+                FileInfo fileNameInfo = new FileInfo(fileName);
+                if (fileNameInfo.Extension != ".csv")
+                {
+                    TargetFileError = "目标文件不正确，请选择.csv文件！";
+                    return false;
+                }
                 //标示是否读取到所需的行
                 bool isDataLine = false;
 		        using (StreamReader sr=new StreamReader(fileName,Encoding.UTF8))
