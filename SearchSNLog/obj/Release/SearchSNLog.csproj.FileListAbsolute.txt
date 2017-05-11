@@ -28,4 +28,3 @@ E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.Properties.Resources.resource
 E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.csproj.GenerateResource.Cache
 E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.exe
 E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.pdb
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.csprojResolveAssemblyReference.cache

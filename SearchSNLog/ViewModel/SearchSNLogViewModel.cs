@@ -248,6 +248,11 @@ namespace SearchSNLog.ViewModel
                     //标示列数
                     int columnCount = 0;
                     //逐行读取CSV中的数据
+                    if (!sr.ReadToEnd().ToUpper().Contains("SERIALNUMBER"))
+                    {
+                        TargetFileError = "目标文件格式不正确！";
+                        return false;
+                    }
                     while ((strLine = sr.ReadLine()) != null)
                     {
                         if (strLine.ToUpper().Contains("SERIALNUMBER") && isFirstCsv)
