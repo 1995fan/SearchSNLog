@@ -1,6 +1,3 @@
-E:\SearchSNLog\SearchSNLog\bin\Release\SearchSNLog.exe.config
-E:\SearchSNLog\SearchSNLog\bin\Release\SearchSNLog.exe
-E:\SearchSNLog\SearchSNLog\bin\Release\SearchSNLog.pdb
 E:\SearchSNLog\SearchSNLog\bin\Release\Xceed.Wpf.AvalonDock.dll
 E:\SearchSNLog\SearchSNLog\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
 E:\SearchSNLog\SearchSNLog\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
@@ -20,11 +17,15 @@ E:\SearchSNLog\SearchSNLog\bin\Release\zh-Hans\Xceed.Wpf.AvalonDock.resources.dl
 E:\SearchSNLog\SearchSNLog\obj\Release\MainWindow.g.cs
 E:\SearchSNLog\SearchSNLog\obj\Release\App.g.cs
 E:\SearchSNLog\SearchSNLog\obj\Release\GeneratedInternalTypeHelper.g.cs
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog_MarkupCompile.cache
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog_MarkupCompile.lref
 E:\SearchSNLog\SearchSNLog\obj\Release\MainWindow.baml
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.g.resources
 E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.Properties.Resources.resources
 E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.csproj.GenerateResource.Cache
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.exe
-E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.pdb
+E:\SearchSNLog\SearchSNLog\obj\Release\SearchSNLog.csprojResolveAssemblyReference.cache
+E:\SearchSNLog\SearchSNLog\bin\Release\FC.Ninja CSV Search.exe.config
+E:\SearchSNLog\SearchSNLog\bin\Release\FC.Ninja CSV Search.exe
+E:\SearchSNLog\SearchSNLog\bin\Release\FC.Ninja CSV Search.pdb
+E:\SearchSNLog\SearchSNLog\obj\Release\FC.Ninja CSV Search_MarkupCompile.cache
+E:\SearchSNLog\SearchSNLog\obj\Release\FC.Ninja CSV Search_MarkupCompile.lref
+E:\SearchSNLog\SearchSNLog\obj\Release\FC.Ninja CSV Search.g.resources
+E:\SearchSNLog\SearchSNLog\obj\Release\FC.Ninja CSV Search.exe
+E:\SearchSNLog\SearchSNLog\obj\Release\FC.Ninja CSV Search.pdb

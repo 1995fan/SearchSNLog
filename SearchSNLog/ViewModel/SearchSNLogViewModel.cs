@@ -143,10 +143,10 @@ namespace SearchSNLog.ViewModel
             IsWaiting = false;
 
         }
-       
 
 
-        public string WaitingContent { get { return "程序处理中，请耐心等待..."; } }
+
+        public string WaitingContent { get { return "Application processing, please be patient..."; } }
 
         public ICommand SetTargetFileNameCommand { get { return new DelegateCommand(SetTargetFileName); } }
         public ICommand SetSNFileNameCommand { get { return new DelegateCommand(SetSNFileName); } }
@@ -220,20 +220,20 @@ namespace SearchSNLog.ViewModel
             bool isFirstCsv = true;
             if (TargetFileName == null)
             {
-                TargetFileError = "请选择目标文件！";
+                TargetFileError = "Please select the target files!";
                 return false;
             }
             foreach (string fileName in TargetFileName.Split(new char[]{';'},StringSplitOptions.RemoveEmptyEntries))
 	        {
                 if (!File.Exists(fileName))
                 {
-                    TargetFileError = "目标文件不存在，请重新选择！";
+                    TargetFileError = "The target files does not exist, please choose again!";
                     return false;
                 }
                 FileInfo fileNameInfo = new FileInfo(fileName);
                 if (fileNameInfo.Extension != ".csv")
                 {
-                    TargetFileError = "目标文件不正确，请选择.csv文件！";
+                    TargetFileError = "The target files format is not correct, please select .CSV file!";
                     return false;
                 }
                 //标示是否读取到所需的行
@@ -248,11 +248,11 @@ namespace SearchSNLog.ViewModel
                     //标示列数
                     int columnCount = 0;
                     //逐行读取CSV中的数据
-                    if (!sr.ReadToEnd().ToUpper().Contains("SERIALNUMBER"))
-                    {
-                        TargetFileError = "目标文件格式不正确！";
-                        return false;
-                    }
+                    //if (!sr.ReadToEnd().ToUpper().Contains("SERIALNUMBER"))
+                    //{
+                    //    TargetFileError = "目标文件格式不正确！";
+                    //    return false;
+                    //}
                     while ((strLine = sr.ReadLine()) != null)
                     {
                         if (strLine.ToUpper().Contains("SERIALNUMBER") && isFirstCsv)
@@ -305,18 +305,24 @@ namespace SearchSNLog.ViewModel
                 }
 	        }
 
+            if (isFirstCsv)
+            {
+                TargetFileError = "The CSV file format is not correct, please choose again!";
+                return false;
+            }
+
             //DataTable dt1 = dt.Clone();
 
             if (SNTextBox == null||SNTextBox == string.Empty)
             {
                 if (SNFileName == null)
                 {
-                    SNError = "请选择SN文件或双击输入SN！";
+                    SNError = "Please select a SN files or double-click to input SN!";
                     return false;
                 }
                 if (!File.Exists(SNFileName))
                 {
-                    SNError = "SN文件不存在，请重新选择！";
+                    SNError = "SN file does not exist, please choose again!";
                     return false;
                 }
                 using (StreamReader sr = new StreamReader(SNFileName))
@@ -370,7 +376,7 @@ namespace SearchSNLog.ViewModel
 
             DataTable dtView = dt.DefaultView.ToTable();
 
-            ResultStr = string.Format("共{0}条记录", dtView.Rows.Count);
+            ResultStr = string.Format("A total of {0} records", dtView.Rows.Count);
 
             if (dtView.Rows.Count ==0)
             {

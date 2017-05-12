@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModel="clr-namespace:SearchSNLog.ViewModel"
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="MainWindow" MaxHeight="233" MaxWidth="538">
+        Title="FC.Ninja CSV Search" MaxHeight="233" MaxWidth="538">
     <Window.DataContext>
         <viewModel:SearchSNLogViewModel></viewModel:SearchSNLogViewModel>
     </Window.DataContext>
@@ -21,19 +21,19 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="2" Content="查询的文件" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                <Label Grid.Row="2" Content="CSV Files" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Label>
                 <TextBlock Grid.Row="2" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding TargetFileError}" Margin="75,5,0,0"></TextBlock>
-                <TextBox Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,1,0,1" Text="{Binding TargetFileName}"></TextBox>
-                <Button Grid.Row="3" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetTargetFileNameCommand}"></Button>
-                <Label Grid.Row="4" Content="SN" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
-                <TextBlock Grid.Row="4" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding SNError}" Margin="30,5,0,0"></TextBlock>
+                <TextBox Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,0,0,0" Text="{Binding TargetFileName}"></TextBox>
+                <Button Grid.Row="3" Content="Browse..." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="56" Command="{Binding SetTargetFileNameCommand}"></Button>
+                <Label Grid.Row="4" Content="SN" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,0,0,0"/>
+                <TextBlock Grid.Row="4" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding SNError}" Margin="33,5,0,0"></TextBlock>
                 <TextBox Grid.Row="5" x:Name="SN" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="450" Margin="7,0,0,0" Text="{Binding SNFileName}" MouseDoubleClick="TextBox_MouseDoubleClick"></TextBox>
-                <Button Grid.Row="5" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetSNFileNameCommand}"></Button>
-                <Label Grid.Row="6" Content="生成目录" HorizontalAlignment="Left"></Label>
-                <TextBox Grid.Row="7" HorizontalAlignment="Left" Height="23" Width="450" Margin="7,1,0,42" Grid.RowSpan="2" Text="{Binding ResultDir}"></TextBox>
-                <Button Grid.Row="7" Content="浏览" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="52" Command="{Binding SetResultLogDirCommand}"></Button>
-                <TextBlock Grid.Row="8" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding ResultStr}" Margin="5,10,0,0"></TextBlock>
-                <Button Grid.Row="8" Content="查询" HorizontalAlignment="Center" Width="75" Margin="10" Command="{Binding SearchSNLogCommand}"></Button>
+                <Button Grid.Row="5" Content="Browse..." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="56" Command="{Binding SetSNFileNameCommand}"></Button>
+                <Label Grid.Row="6" Content="Save Directory" HorizontalAlignment="Left" Margin="5,0,0,0"></Label>
+                <TextBox Grid.Row="7" HorizontalAlignment="Left" Height="23" Width="450" Margin="7,0,0,42" Grid.RowSpan="2" Text="{Binding ResultDir}"></TextBox>
+                <Button Grid.Row="7" Content="Browse..." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,0,0,0" Width="56" Command="{Binding SetResultLogDirCommand}"></Button>
+                <TextBlock Grid.Row="8" Foreground="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding ResultStr}" Margin="7,12,0,0"></TextBlock>
+                <Button Grid.Row="8" Content="Search" HorizontalAlignment="Center" Width="75" Margin="10" Command="{Binding SearchSNLogCommand}"></Button>
             </Grid>
 
             <Grid x:Name="SNGrid" Visibility="Collapsed" >
@@ -44,7 +44,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions >
                         <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="200" Margin="5" Grid.Column="0" Text="{Binding SNTextBox}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
-                        <Button Content="确定" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="60,80" Grid.Column="1" Click="Button_Click"></Button>
+                        <Button Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Height="26" Margin="60,80" Grid.Column="1" Click="Button_Click"></Button>
                     </Grid>
                 </Border>
             </Grid>
